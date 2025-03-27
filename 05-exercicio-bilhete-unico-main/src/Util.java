@@ -7,7 +7,7 @@ import static java.lang.Double.parseDouble;
 
 public class Util {
     //banco de dados
-    private BilheteUnico[] bilhete = new BilheteUnico[2];
+    private BilheteUnico[] bilhete = new BilheteUnico[5];
     private int index = 0;
 
     //MENU PRINCIPAL
@@ -37,6 +37,8 @@ public class Util {
                     emitir();
                 } else if (opcao == 2) {
                     listar();
+                } else if (opcao == 3) {
+                    excluir();
                 }
             }
         }while(opcao !=4);
@@ -66,6 +68,17 @@ public class Util {
 
     }
 
+    private void excluir(){
+        int resposta;
+        int indice = pesquisar();
+        if (indice != -1){
+            resposta = showConfirmDialog(null,"Tem certeza que deseja excluir?");
+            if(resposta == YES_OPTION) {
+                bilhete[indice] = bilhete[index-1];
+                index--;
+            }
+        }
+    }
 
     //MENU USUARIO
     private void menuUsuario(){
@@ -87,7 +100,6 @@ public class Util {
         }while(opcao!=4);
     }
 
-
     private int pesquisar(){
         long cpf=parseLong(showInputDialog("CPF: "));;
 
@@ -99,7 +111,6 @@ public class Util {
         showMessageDialog(null, "CPF não encontrado");
         return -1;
     }
-
 
     private void carregarBilhete(){
         String menu="Insira o valor que deseja carregar:";
